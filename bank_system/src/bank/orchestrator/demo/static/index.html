@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bank Orchestrator — Five-Pillar Demo</title>
+  <link rel="stylesheet" href="/static/app.css" />
+  <link rel="icon" href="data:," />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-mark">BO</span>
+      <div>
+        <h1>Bank Orchestrator <span class="ver" id="app-version">v—</span></h1>
+        <p class="sub">Basel-aligned five-pillar credit origination, guarantee-buffer &amp; governance demo</p>
+      </div>
+    </div>
+    <div class="header-status">
+      <div class="chip-row" id="header-chips"></div>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="dashboard">Dashboard</button>
+    <button class="tab" data-tab="p2">P2 Scoring</button>
+    <button class="tab" data-tab="p3">P3 Facilities</button>
+    <button class="tab" data-tab="p4">P4 Prudential</button>
+    <button class="tab" data-tab="gov">Governance</button>
+  </nav>
+
+  <main id="app">
+    <section class="panel" id="panel-dashboard" data-panel></section>
+    <section class="panel hidden" id="panel-p2" data-panel></section>
+    <section class="panel hidden" id="panel-p3" data-panel></section>
+    <section class="panel hidden" id="panel-p4" data-panel></section>
+    <section class="panel hidden" id="panel-gov" data-panel></section>
+  </main>
+
+  <footer class="app-footer">
+    <span id="foot-note">Loading demo surface…</span>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+{
+  "id": "9d5efe0a-b8de-4611-8b8c-2a3a19678255",
+  "seed_profile": "nadia",
+  "first_name": "Nadia",
+  "last_name": "Catering Service",
+  "name_ar": null,
+  "gender": "female",
+  "age": 37,
+  "national_id": null,
+  "phone": null,
+  "city": "Muscat",
+  "employer_name": "Catering Service",
+  "employer_type": "private",
+  "employment_years": 5.0,
+  "employer_start_date": null,
+  "job_title": null,
+  "monthly_salary": 6500.0,
+  "product": "auto_loan",
+  "requested_amount": 45000.0,
+  "requested_tenure_months": 5,
+  "status": "new",
+  "submitted_at": null,
+  "scored_at": null,
+  "approved_at": null,
+  "originated_at": null,
+  "disbursed_at": null,
+  "application_id": null,
+  "facility_id": null,
+  "p2_brr": null,
+  "p2_pd": null,
+  "p2_lgd": null,
+  "p2_ead": null,
+  "p2_el": null,
+  "p2_zone": null,
+  "p2_packet_status": null,
+  "application_json": {
+    "application_id": "APP-NADIA-305",
+    "segment": "SMALL",
+    "operating_model": "G",
+    "facility": {
+      "product": "WORKING_CAPITAL_LINE",
+      "requested_amount": 45000.0,
+      "drawn_amount": 35000.0,
+      "undrawn_amount": 10000.0,
+      "tenor_months": null,
+      "recourse": true
+    },
+    "maturity_regime": "HIGH",
+    "model_maturity_stage": "PRODUCTION",
+    "financials": {
+      "revenue": 380000.0,
+      "cost_of_sales": 220000.0,
+      "operating_expenses": 65000.0,
+      "net_profit": 95000.0,
+      "period_end": "2026-09-05",
+      "total_assets": 320000.0,
+      "current_assets": null,
+      "total_liabilities": 75000.0,
+      "current_liabilities": null,
+      "equity": 245000.0,
+      "prior_period_revenue": 340000.0
+    },
+    "cash_flow": {
+      "daily_net_cashflow": [
+        1100.0,
+        1200.0,
+        1050.0,
+        1150.0,
+        1250.0,
+        1080.0,
+        1120.0,
+        1180.0,
+        1280.0,
+        1060.0
+      ],
+      "avg_daily_inflow": 1800.0,
+      "debt_service_obligation": 520.0,
+      "receivable_days": 18.0,
+      "payable_days": 30.0,
+      "inventory_days": 8.0,
+      "bounced_items_count": 0,
+      "months_of_history": 12.0
+    },
+    "business": {
+      "top5_customer_share": 0.28,
+      "single_supplier_share": 0.2,
+      "registration_date": "2021-09-16",
+      "sector_code": "FOOD_SERVICES",
+      "geography_code": "MUSCAT",
+      "legal_form": null
+    },
+    "management": {
+      "owner_experience_years": 5.0,
+      "prior_default_history": false,
+      "has_governance_plan": true,
+      "account_conduct_score": 0.92
+    },
+    "alternative": {
+      "utility_payment_regularity": null,
+      "telco_regularity": null,
+      "ecommerce_reputation_score": null,
+      "supply_chain_centrality": null
+    },
+    "collateral": [
+      {
+        "collateral_class": "RECEIVABLES",
+        "track": "TRACK_1_CLASSICAL",
+        "p4_admitted_value": 25000.0
+      },
+      {
+        "collateral_class": "EQUIPMENT",
+        "track": "TRACK_1_CLASSICAL",
+        "p4_admitted_value": 10000.0
+      }
+    ],
+    "rails_connected": [
+      "kyc",
+      "bank_feed",
+      "tax",
+      "pos",
+      "mobile_money",
+      "accounting"
+    ],
+    "policy_exception_flags": []
+  },
+  "payment_behavior": {
+    "outcome": "paid",
+    "facility_amount": 45000,
+    "disbursed": 35000,
+    "currency": "USD",
+    "tenure_months": 5,
+    "delinquent_month": null,
+    "default_month": null,
+    "recovered_amount": 0.0,
+    "interest_rate_bps": 1900,
+    "repayments": [
+      {
+        "interest": 550.0,
+        "principal": 7000.0,
+        "month": 1
+      },
+      {
+        "interest": 480.0,
+        "principal": 7000.0,
+        "month": 2
+      },
+      {
+        "interest": 410.0,
+        "principal": 7000.0,
+        "month": 3
+      },
+      {
+        "interest": 340.0,
+        "principal": 7000.0,
+        "month": 4
+      },
+      {
+        "interest": 270.0,
+        "principal": 7000.0,
+        "month": 5
+      }
+    ]
+  },
+  "sim_state": {
+    "current_month": 0,
+    "payments_made": []
+  },
+  "created_at": "2026-09-15T13:12:55.841429",
+  "updated_at": "2026-09-15T13:12:55.841429",
+  "approval_note": null,
+  "approved_by": null,
+  "display_name": "Nadia Catering Service"
+}

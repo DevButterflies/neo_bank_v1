@@ -1,0 +1,147 @@
+{
+  "id": "b5bb81ee-61e1-4b70-9428-0664905cbcbf",
+  "seed_profile": "ahmed",
+  "first_name": "Ahmed",
+  "last_name": "Corner Shop",
+  "name_ar": null,
+  "gender": "male",
+  "age": 34,
+  "national_id": null,
+  "phone": null,
+  "city": "Muscat",
+  "employer_name": "Corner Shop",
+  "employer_type": "self_employed",
+  "employment_years": 5.0,
+  "employer_start_date": null,
+  "job_title": null,
+  "monthly_salary": 1650.0,
+  "product": "auto_loan",
+  "requested_amount": 8000.0,
+  "requested_tenure_months": 5,
+  "status": "new",
+  "submitted_at": null,
+  "scored_at": null,
+  "approved_at": null,
+  "originated_at": null,
+  "disbursed_at": null,
+  "application_id": null,
+  "facility_id": null,
+  "p2_brr": null,
+  "p2_pd": null,
+  "p2_lgd": null,
+  "p2_ead": null,
+  "p2_el": null,
+  "p2_zone": null,
+  "p2_packet_status": null,
+  "application_json": {
+    "application_id": "APP-AHMED-301",
+    "segment": "MICRO",
+    "operating_model": "G",
+    "facility": {
+      "product": "WORKING_CAPITAL_LINE",
+      "requested_amount": 8000.0,
+      "drawn_amount": 6000.0,
+      "undrawn_amount": 2000.0,
+      "tenor_months": null,
+      "recourse": true
+    },
+    "maturity_regime": "INTERMEDIATE",
+    "model_maturity_stage": "PRODUCTION",
+    "financials": {
+      "revenue": null,
+      "cost_of_sales": null,
+      "operating_expenses": null,
+      "net_profit": null,
+      "period_end": null,
+      "total_assets": null,
+      "current_assets": null,
+      "total_liabilities": null,
+      "current_liabilities": null,
+      "equity": null,
+      "prior_period_revenue": null
+    },
+    "cash_flow": {
+      "daily_net_cashflow": null,
+      "avg_daily_inflow": null,
+      "debt_service_obligation": null,
+      "receivable_days": null,
+      "payable_days": null,
+      "inventory_days": null,
+      "bounced_items_count": null,
+      "months_of_history": null
+    },
+    "business": {
+      "top5_customer_share": null,
+      "single_supplier_share": null,
+      "registration_date": "2021-09-16",
+      "sector_code": "TRADE_RETAIL",
+      "geography_code": "MUSCAT",
+      "legal_form": null
+    },
+    "management": {
+      "owner_experience_years": 5.0,
+      "prior_default_history": null,
+      "has_governance_plan": null,
+      "account_conduct_score": null
+    },
+    "alternative": {
+      "utility_payment_regularity": null,
+      "telco_regularity": null,
+      "ecommerce_reputation_score": null,
+      "supply_chain_centrality": null
+    },
+    "collateral": [],
+    "rails_connected": [
+      "kyc",
+      "utility"
+    ],
+    "policy_exception_flags": []
+  },
+  "payment_behavior": {
+    "outcome": "paid",
+    "facility_amount": 8000,
+    "disbursed": 6000,
+    "currency": "USD",
+    "tenure_months": 5,
+    "delinquent_month": null,
+    "default_month": null,
+    "recovered_amount": 0.0,
+    "interest_rate_bps": 2400,
+    "repayments": [
+      {
+        "interest": 120.0,
+        "principal": 1200.0,
+        "month": 1
+      },
+      {
+        "interest": 108.0,
+        "principal": 1200.0,
+        "month": 2
+      },
+      {
+        "interest": 96.0,
+        "principal": 1200.0,
+        "month": 3
+      },
+      {
+        "interest": 84.0,
+        "principal": 1200.0,
+        "month": 4
+      },
+      {
+        "interest": 72.0,
+        "principal": 1200.0,
+        "month": 5
+      }
+    ]
+  },
+  "sim_state": {
+    "current_month": 0,
+    "payments_made": []
+  },
+  "created_at": "2026-09-15T13:12:55.841398",
+  "updated_at": "2026-09-15T13:12:55.841404",
+  "approval_note": null,
+  "approved_by": null,
+  "display_name": "Ahmed Corner Shop"
+}

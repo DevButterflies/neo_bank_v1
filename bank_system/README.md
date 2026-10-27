@@ -1,0 +1,133 @@
+# Bank Microservices
+
+Basel-III-aligned multi-pillar credit origination, guarantee-buffer, and
+governance microservices, delivered as one homogeneous Python project with the
+regulatory **orchestrator as the single entry point**.
+
+## Services
+
+| Service        | Port | Role                                                              |
+| -------------- | ---- | ----------------------------------------------------------------- |
+| orchestrator   | 8000 | Governance registries, canon enforcement, global demo web UI, /   |
+| pillar2        | 8002 | Credit risk engine (BRR, PD, EAD, LGD, EL, 3-zone decisioning)    |
+| pillar3        | 8003 | Origination state machine, postings, collateral, audit trail      |
+| pillar4        | 8004 | Guarantee buffer, EL pool/ULA/LR/RP ledger, veto engine, mode gate|
+
+Every engine is a byte-for-byte port of the pillar source trees; only
+import paths changed (`pillar2.*` -> `bank.pillars.p2.*`, etc.). Storage and
+transport are new infrastructure: **one SQLite file per service** (shared via
+the `bank_data` Docker volume) and a **static SPA** (no build step) served by
+the orchestrator.
+
+## Run with Docker
+
+```bash
+docker compose up --build
+```
+
+Then open http://localhost:8000 for the demo UI and /docs for the API.
+
+## Run locally
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate        # (Windows) / source .venv/bin/activate (POSIX)
+pip install -e ".[dev]"
+cp .env.example .env          # adjust if needed
+uvicorn bank.orchestrator.main:app --host 0.0.0.0 --port 8000
+uvicorn bank.pillars.p2.api:app --host 0.0.0.0 --port 8002
+uvicorn bank.pillars.p3.api:app --host 0.0.0.0 --port 8003
+uvicorn bank.pillars.p4.api:app --host 0.0.0.0 --port 8004
+```
+
+## Demo web app contract (backend is ready)
+
+The orchestrator on :8000 is the single public entry point and serves
+everything the demo UI needs. CORS is open (`allow_origins=["*"]`). Each
+service exposes its own OpenAPI under `{prefix}/openapi.json` / `{prefix}/docs`.
+
+| Area          | Route (verified from the running app)                | Methods                     |
+| ------------- | ---------------------------------------------------- | --------------------------- |
+| system        | `/health`, `/ready`                                  | GET                         |
+| system        | `/docs` (orchestrator-level API)                     | GET                         |
+| governance    | `/governance/api/v1/canon/*`                         | GET/POST                    |
+| governance    | `/governance/api/v1/pillars/*`                       | GET/POST                    |
+| governance    | `/governance/api/v1/tiers*`                          | GET/PUT                     |
+| governance    | `/governance/api/v1/staging/*`                       | GET/PUT/POST                |
+| governance    | `/governance/api/v1/pending*`, `/vetoes*`            | GET/POST/PUT                |
+| governance    | `/governance/api/v1/lexicon/*`, `/interfaces*`       | GET/POST/PUT                |
+| governance    | `/governance/api/v1/changes/*`, `/cass-stub*`        | GET/POST/PUT                |
+| p2 (risk)     | `/p2/v1/score`, `/p2/v1/ews`, `/p2/v1/cass-feed`     | POST                        |
+| p2 (risk)     | `/p2/v1/brr-pd-grid`, `/p2/v1/category-weights/{s}`  | GET                         |
+| p2 (risk)     | `/p2/v1/pooled-guarantee-level`, `/p2/v1/override/*` | POST                        |
+| p3 (orig.)    | `/p3/api/v1/p3/facilities*`, `/p3/api/v1/p3/packets` | GET                         |
+| p3 (orig.)    | `/p3/api/v1/p3/originate`, `.../disburse`            | POST                        |
+| p3 (orig.)    | `/p3/api/v1/p3/ledger`, `.../postings`, `.../reconcile` | GET                      |
+| p3 (orig.)    | `/p3/api/v1/p3/repayment`, `.../mark-delinquent`, `.../close` (etc.) | POST |
+| p4 (buffer)   | `/p4/api/v1/p4/buffer/balances`, `.../pool/adequacy` | GET                         |
+| p4 (buffer)   | `/p4/api/v1/p4/capital/snapshot`, `.../ifrs9`        | GET                         |
+| p4 (buffer)   | `/p4/api/v1/p4/veto/*`, `.../mode*`, `.../pledge/*`  | GET/POST                    |
+| p4 (buffer)   | `/p4/api/v1/p4/risk-packet`, `.../staging-signal`    | POST                        |
+
+> **Note on p3/p4 prefixes**: the running routes are exactly as above — Pillar 3
+> routes live at `/p3/api/v1/p3/...` and Pillar 4 at `/p4/api/v1/p4/...` (each
+> ASGI mount plus its internal `api_prefix` + router prefix). The `/docs` pages
+> per mount show the truth; do not "simplify" these paths.
+
+### Demo data
+
+To boot the orchestrator with realistic, engine-produced data (3 facilities —
+ACTIVE / REPAYING / CLOSED — plus P4 risk packets and staging signals), run
+once before starting the server:
+
+```bash
+python -m bank.orchestrator.demo.seed    # writes ./data/orchestrator.db
+```
+
+The seed drives the real Pillar 3/4 engines through their production facades
+(no fabricated blobs) and ends by re-opening fresh runtimes to prove the
+persisted snapshot rehydrates byte-identically — the same restart contract
+that `/ready` asserts.
+
+> The SPA surface itself (`/` static UI, `src/bank/orchestrator/demo/`) is the
+> next coding step; every upstream route it consumes is live and tested above.
+
+## Tests
+
+```bash
+python -m pytest -q
+```
+
+Ports: 78 pillar engine tests (`tests/unit`), 55 governance tests
+(`tests/governance`), in-process integration suite over all four ASGI apps
+(`tests/integration`).
+
+The restart-ok story across Pillar 3/4 storage and the orchestrator is proven
+three ways and kept green by the suite:
+
+* `tests/pillars/rt3_restart.py`/`rt4_restart.py` — per-pillar KvStore
+  byte-identical round-trip tapes.
+* `tests/pillars/rt_orchestrator_restart.py` — orchestrator-level re-open tape.
+* `tests/integration/test_orchestrator_ready.py` — `/ready` as served by the
+  real app, and `tests/integration/test_orchestrator_boot.py` — the literal
+  `uvicorn bank.orchestrator.main:app` README command booted as a subprocess
+  and probed over real HTTP.
+
+## Layout
+
+```
+src/bank/
+  core/                  shared config, logging, SQLite, API factory, errors
+  pillars/
+    p1/                  MSME applicant archetypes (stub for origination)
+    p2/                  credit risk engine
+    p3/                  origination state machine + postings + audit
+    p4/                  guarantee buffer + veto + mode gate
+    api/                 packaged service apps for pillar services
+  orchestrator/
+    governance/          real governance service (canon, registries, vetoes)
+    workflow/            cross-service orchestration glue
+    demo/                global demo simulation + static SPA
+    main.py              single entry point (mounts everything)
+data/                    per-service SQLite files (mounted at deploy)
+```

@@ -1,0 +1,140 @@
+{
+  "id": "6c6b30af-55ec-46fa-bf99-768a4aecdfb6",
+  "seed_profile": "omar",
+  "first_name": "Omar",
+  "last_name": "Fruit Vendor",
+  "name_ar": null,
+  "gender": "male",
+  "age": 33,
+  "national_id": null,
+  "phone": null,
+  "city": "Batinah",
+  "employer_name": "Fruit Vendor",
+  "employer_type": "self_employed",
+  "employment_years": 3.0,
+  "employer_start_date": null,
+  "job_title": null,
+  "monthly_salary": 1800.0,
+  "product": "auto_loan",
+  "requested_amount": 15000.0,
+  "requested_tenure_months": 5,
+  "status": "new",
+  "submitted_at": null,
+  "scored_at": null,
+  "approved_at": null,
+  "originated_at": null,
+  "disbursed_at": null,
+  "application_id": null,
+  "facility_id": null,
+  "p2_brr": null,
+  "p2_pd": null,
+  "p2_lgd": null,
+  "p2_ead": null,
+  "p2_el": null,
+  "p2_zone": null,
+  "p2_packet_status": null,
+  "application_json": {
+    "application_id": "APP-OMAR-304",
+    "segment": "MICRO",
+    "operating_model": "G",
+    "facility": {
+      "product": "WORKING_CAPITAL_LINE",
+      "requested_amount": 15000.0,
+      "drawn_amount": 12000.0,
+      "undrawn_amount": 3000.0,
+      "tenor_months": null,
+      "recourse": true
+    },
+    "maturity_regime": "INTERMEDIATE",
+    "model_maturity_stage": "PRODUCTION",
+    "financials": {
+      "revenue": 95000.0,
+      "cost_of_sales": 68000.0,
+      "operating_expenses": 15000.0,
+      "net_profit": 12000.0,
+      "period_end": "2026-08-11",
+      "total_assets": 65000.0,
+      "current_assets": null,
+      "total_liabilities": 42000.0,
+      "current_liabilities": null,
+      "equity": 23000.0,
+      "prior_period_revenue": null
+    },
+    "cash_flow": {
+      "daily_net_cashflow": null,
+      "avg_daily_inflow": 380.0,
+      "debt_service_obligation": 280.0,
+      "receivable_days": 35.0,
+      "payable_days": 20.0,
+      "inventory_days": 40.0,
+      "bounced_items_count": 2,
+      "months_of_history": 5.0
+    },
+    "business": {
+      "top5_customer_share": 0.48,
+      "single_supplier_share": 0.4,
+      "registration_date": "2023-09-16",
+      "sector_code": "FOOD_RETAIL",
+      "geography_code": "AL_BATINAH",
+      "legal_form": null
+    },
+    "management": {
+      "owner_experience_years": 3.0,
+      "prior_default_history": false,
+      "has_governance_plan": false,
+      "account_conduct_score": 0.58
+    },
+    "alternative": {
+      "utility_payment_regularity": null,
+      "telco_regularity": null,
+      "ecommerce_reputation_score": null,
+      "supply_chain_centrality": null
+    },
+    "collateral": [
+      {
+        "collateral_class": "RECEIVABLES",
+        "track": "TRACK_1_CLASSICAL",
+        "p4_admitted_value": 7000.0
+      }
+    ],
+    "rails_connected": [
+      "kyc",
+      "bank_feed",
+      "tax",
+      "pos"
+    ],
+    "policy_exception_flags": []
+  },
+  "payment_behavior": {
+    "outcome": "default",
+    "facility_amount": 15000,
+    "disbursed": 12000,
+    "currency": "USD",
+    "tenure_months": 5,
+    "delinquent_month": 3,
+    "default_month": 4,
+    "recovered_amount": 4500,
+    "interest_rate_bps": 2200,
+    "repayments": [
+      {
+        "interest": 220.0,
+        "principal": 2000.0,
+        "month": 1
+      },
+      {
+        "interest": 200.0,
+        "principal": 2000.0,
+        "month": 2
+      }
+    ]
+  },
+  "sim_state": {
+    "current_month": 0,
+    "payments_made": []
+  },
+  "created_at": "2026-09-15T13:12:55.841425",
+  "updated_at": "2026-09-15T13:12:55.841425",
+  "approval_note": null,
+  "approved_by": null,
+  "display_name": "Omar Fruit Vendor"
+}

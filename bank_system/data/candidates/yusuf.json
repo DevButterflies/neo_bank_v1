@@ -1,0 +1,127 @@
+{
+  "id": "712045ee-2958-4b44-947b-d129c5967e61",
+  "seed_profile": "yusuf",
+  "first_name": "Yusuf",
+  "last_name": "Street Vendor",
+  "name_ar": null,
+  "gender": "male",
+  "age": 29,
+  "national_id": null,
+  "phone": null,
+  "city": "Dhofar",
+  "employer_name": "Street Vendor",
+  "employer_type": "self_employed",
+  "employment_years": 1.0,
+  "employer_start_date": null,
+  "job_title": null,
+  "monthly_salary": 1100.0,
+  "product": "auto_loan",
+  "requested_amount": 5000.0,
+  "requested_tenure_months": 4,
+  "status": "new",
+  "submitted_at": null,
+  "scored_at": null,
+  "approved_at": null,
+  "originated_at": null,
+  "disbursed_at": null,
+  "application_id": null,
+  "facility_id": null,
+  "p2_brr": null,
+  "p2_pd": null,
+  "p2_lgd": null,
+  "p2_ead": null,
+  "p2_el": null,
+  "p2_zone": null,
+  "p2_packet_status": null,
+  "application_json": {
+    "application_id": "APP-YUSUF-302",
+    "segment": "MICRO",
+    "operating_model": "G",
+    "facility": {
+      "product": "WORKING_CAPITAL_LINE",
+      "requested_amount": 5000.0,
+      "drawn_amount": 4000.0,
+      "undrawn_amount": 1000.0,
+      "tenor_months": null,
+      "recourse": true
+    },
+    "maturity_regime": "INTERMEDIATE",
+    "model_maturity_stage": "PRODUCTION",
+    "financials": {
+      "revenue": null,
+      "cost_of_sales": null,
+      "operating_expenses": null,
+      "net_profit": null,
+      "period_end": null,
+      "total_assets": null,
+      "current_assets": null,
+      "total_liabilities": null,
+      "current_liabilities": null,
+      "equity": null,
+      "prior_period_revenue": null
+    },
+    "cash_flow": {
+      "daily_net_cashflow": null,
+      "avg_daily_inflow": null,
+      "debt_service_obligation": null,
+      "receivable_days": null,
+      "payable_days": null,
+      "inventory_days": null,
+      "bounced_items_count": null,
+      "months_of_history": null
+    },
+    "business": {
+      "top5_customer_share": null,
+      "single_supplier_share": null,
+      "registration_date": "2026-02-17",
+      "sector_code": "HOSPITALITY_TOURISM",
+      "geography_code": "DHOFAR",
+      "legal_form": null
+    },
+    "management": {
+      "owner_experience_years": 1.0,
+      "prior_default_history": null,
+      "has_governance_plan": null,
+      "account_conduct_score": null
+    },
+    "alternative": {
+      "utility_payment_regularity": null,
+      "telco_regularity": null,
+      "ecommerce_reputation_score": null,
+      "supply_chain_centrality": null
+    },
+    "collateral": [],
+    "rails_connected": [
+      "kyc",
+      "mobile_money"
+    ],
+    "policy_exception_flags": []
+  },
+  "payment_behavior": {
+    "outcome": "default",
+    "facility_amount": 5000,
+    "disbursed": 4000,
+    "currency": "USD",
+    "tenure_months": 4,
+    "delinquent_month": 2,
+    "default_month": 3,
+    "recovered_amount": 1500,
+    "interest_rate_bps": 3000,
+    "repayments": [
+      {
+        "interest": 100.0,
+        "principal": 800.0,
+        "month": 1
+      }
+    ]
+  },
+  "sim_state": {
+    "current_month": 0,
+    "payments_made": []
+  },
+  "created_at": "2026-09-15T13:12:55.841414",
+  "updated_at": "2026-09-15T13:12:55.841414",
+  "approval_note": null,
+  "approved_by": null,
+  "display_name": "Yusuf Street Vendor"
+}

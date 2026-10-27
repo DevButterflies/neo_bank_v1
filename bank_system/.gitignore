@@ -1,0 +1,20 @@
+# Runtime output — never part of the deliverable (R5)
+*.log
+server.pid
+
+# Backups of the pre-fix database, with the wrong numbers in them (R5)
+*.bak-*
+
+# Build artifacts (R5)
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtualenv and JS dependencies
+.venv/
+node_modules/
+
+# NOTE: data/*.db is deliberately NOT ignored. The shipped orchestrator.db
+# carries the verified golden scenario (actif/passif 95,510, reliable: true)
+# and is part of the deliverable.
