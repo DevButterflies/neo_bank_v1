@@ -29,7 +29,7 @@ from pathlib import Path
 import httpx
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, Response
+from fastapi.responses import FileResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from bank.orchestrator.config import get_orchestrator_settings
@@ -64,6 +64,11 @@ async def lifespan(app: FastAPI):
     # under a mount, so this top-level lifespan owns create_all).
     from bank.orchestrator.governance.database import init_models
     await init_models()
+
+    # The mounted governance app's own lifespan never runs, so load the canon
+    # status its enforcement middleware reads on every mutating request.
+    from bank.orchestrator.governance.main import load_canon_status
+    await load_canon_status(_mounts["/governance"])
 
     # Seed Tier D capital base (governance-approved initial equity) into the P4
     # runtime once — idempotent (only when uninitialized / after factory reset),
@@ -188,8 +193,31 @@ app.include_router(bilan_router)
 _demo_root = Path(__file__).resolve().parents[3] / "demo"
 _demo_static = Path(__file__).resolve().parent / "demo" / "static"
 _vite_dist = _demo_root / "dist"
+_frontend_dist = Path(settings.frontend_dist).resolve()
 
-if _vite_dist.exists():
+if (_frontend_dist / "index.html").exists():
+    # The CCC-NeoBank front end lives under /app/ so its client routes
+    # (/bilan, /governance) never shadow the API paths of the same name.
+    app.mount(
+        "/app/assets",
+        StaticFiles(directory=str(_frontend_dist / "assets")),
+        name="frontend_assets",
+    )
+
+    @app.get("/app", include_in_schema=False)
+    @app.get("/app/{path:path}", include_in_schema=False)
+    async def frontend(path: str = "") -> FileResponse:
+        """Serve a built file when one exists, else the SPA shell so a deep
+        link or refresh on a client route still boots the app."""
+        candidate = (_frontend_dist / path).resolve()
+        if path and candidate.is_file() and candidate.is_relative_to(_frontend_dist):
+            return FileResponse(candidate)
+        return FileResponse(_frontend_dist / "index.html")
+
+    @app.get("/", include_in_schema=False)
+    async def root() -> RedirectResponse:
+        return RedirectResponse("/app/")
+elif _vite_dist.exists():
     app.mount("/assets", StaticFiles(directory=str(_vite_dist / "assets")), name="demo_vite_assets")
 
     @app.get("/", include_in_schema=False)

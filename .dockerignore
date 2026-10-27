@@ -1,0 +1,13 @@
+.git
+**/node_modules
+**/dist
+**/.venv
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+**/*.egg-info
+**/*.log
+bank-demo-frontend
+openapi.json
+bank_system/docs
+bank_system/tests

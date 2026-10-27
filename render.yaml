@@ -1,0 +1,20 @@
+# Render Blueprint: New > Blueprint, pick this repo.
+# One web service serves the API and the front end (/ redirects to /app/).
+services:
+  - type: web
+    name: ccc-neobank
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    # /health is a pure liveness check; /ready re-opens the KvStore and can write.
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # Required by PUT /bilan/config (X-Admin-Token); read it from the Render dashboard.
+      - key: BANK_ORCH_BILAN_ADMIN_TOKEN
+        generateValue: true
+      # 0 = the demo clock only moves on POST /p1/demo/tick.
+      - key: BANK_SIMULATION_TICK_SECONDS
+        value: "0"

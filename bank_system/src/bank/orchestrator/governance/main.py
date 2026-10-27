@@ -31,6 +31,20 @@ from bank.orchestrator.governance.models.canon import CanonVersion
 from bank.orchestrator.governance.database import async_session_factory
 
 
+async def load_canon_status(app: FastAPI) -> None:
+    """Load the current canon status into app state for middleware enforcement.
+
+    Also called by the orchestrator: Starlette never runs a mounted sub-app's
+    lifespan, so without it every mutating governance request fails with 500.
+    """
+    async with async_session_factory() as db:
+        result = await db.execute(
+            select(CanonVersion).where(CanonVersion.is_current.is_(True)).limit(1)
+        )
+        current = result.scalar_one_or_none()
+        app.state.current_canon_status = current.status if current else "NONE"
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan: initialize DB and load current canon status into app state."""
@@ -38,13 +52,7 @@ async def lifespan(app: FastAPI):
         await init_models()
         logger.info("Database tables ensured.")
 
-    # Load current canon status into app state for middleware enforcement.
-    async with async_session_factory() as db:
-        result = await db.execute(
-            select(CanonVersion).where(CanonVersion.is_current.is_(True)).limit(1)
-        )
-        current = result.scalar_one_or_none()
-        app.state.current_canon_status = current.status if current else "NONE"
+    await load_canon_status(app)
 
     yield
 

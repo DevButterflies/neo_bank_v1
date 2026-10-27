@@ -1,0 +1,47 @@
+:root {
+  /* ground and ink */
+  --ground: #f7f7f4;
+  --surface: #ffffff;
+  --ink: #161616;
+  --ink-2: #3d3d39;
+  --mute: #5f5f59;
+  --rule: #dcdcd4;
+  --rule-strong: #b9b9b0;
+  --wash: #efefe9;
+
+  /* pillar lines (strokes and fills) */
+  --p1: #1f4fa0; /* intake */
+  --p2: #14917d; /* credit */
+  --p3: #e2a21b; /* execution */
+  --p4: #d03a3a; /* prudential */
+
+  /* the same lines when they must carry text on white */
+  --p2-text: #0c6b5c;
+  --p3-text: #8a5a00;
+  --p4-text: #b02a2a;
+
+  --flash: #fff1c2;
+  --focus: #1f4fa0;
+
+  --font: "Archivo", system-ui, sans-serif;
+
+  --step--1: 0.8125rem; /* 13px */
+  --step-0: 0.9375rem; /* 15px */
+  --step-1: 1.125rem; /* 18px */
+  --step-2: 1.5rem; /* 24px */
+  --step-3: 2rem; /* 32px */
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --line: 10px;
+  --mark: 30px;
+  --radius: 2px;
+  --gutter: clamp(16px, 2.2vw, 32px);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

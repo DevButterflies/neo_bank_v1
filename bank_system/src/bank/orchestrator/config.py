@@ -66,6 +66,11 @@ class OrchestratorSettings(BaseSettings):
     # Set BANK_ORCH_BILAN_ADMIN_TOKEN to enable it.
     bilan_admin_token: str | None = None
 
+    # Built CCC-NeoBank front end, served under /app/ when present. Defaults to
+    # ``frontend/dist`` beside this project (``npm run build`` in frontend/).
+    # Set BANK_ORCH_FRONTEND_DIST to serve another build.
+    frontend_dist: str = str(_PROJECT_ROOT.parent / "frontend" / "dist")
+
 
 @lru_cache
 def get_orchestrator_settings() -> OrchestratorSettings:
